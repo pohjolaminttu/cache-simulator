@@ -12,7 +12,10 @@ send data and 1 (write) to memory
  */
 public class Cache {
     /*blocks etc structure where to save staff*/
-    public Cache(){}
+    DRAM dram;
+    public Cache(DRAM dram){
+        this.dram = dram;
+    }
 
     /**
      * Handles the request from CPU and operates either reading or writing method

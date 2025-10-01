@@ -1,15 +1,22 @@
 public class DRAM {
-    private int[][] memory;
-    private int rows;
-    private int cols;
+    private int[] memory;
+    private int memorySize;
+
+    public DRAM(int size){
+            memorySize = size;
+            memory = new int[memorySize];
+    }
 
     /**
-     *
-     * @.pre size > 0 && Math.sqrt(size) % 1 == 0
+     * Method checks whether type of request is read or write, and do that in given address
+     * @.pre requestType == 1 // requestType == 0
      */
-    public DRAM(int size){
-            rows = (int)Math.sqrt(size);
-            cols = rows; /*Tarvitaanko tätä, ehkä osotteiden setvimisessä?*/
-            memory = new int[rows][cols];
+    public void requestToMemory (int requestType, String address, int dataOut, int dataIn ) { //do we actually need dataIn here?
+        int add = AddressParser.toDram(address);
+        if (requestType == 0) /*READ*/ {
+
         }
+    }
+
+
 }

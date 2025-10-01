@@ -1,0 +1,28 @@
+/**
+ * In CPU we have addresses in hexadecimal form, 0x00 to 0x3F (String)
+ * In cache we have addresses in binary form, 000000 to 111111 (String)
+ * In DRAM we have addresses in decimal form, 0 to 63 (Integer)
+ */
+public class AddressParser {
+
+    public static int toDram (String address) {
+        int add = Integer.parseInt(address, 2);
+        return add;
+    }
+
+    public static String toCache (Object address) {
+        String add = "";
+        if (address instanceof String)/*Comes from CPU*/ {
+
+        } else if (address instanceof Integer) /*Comes from DRAM*/ {
+            add = Integer.toBinaryString((Integer) address);
+        }
+        return add;
+    }
+
+    public static String toCpu (String address) {
+        String add = "";
+
+        return add;
+    }
+}
