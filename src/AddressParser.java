@@ -13,7 +13,7 @@ public class AddressParser {
     public static String toCache (Object address) {
         String add = "";
         if (address instanceof String)/*Comes from CPU*/ {
-
+            add = Integer.toBinaryString(Integer.parseInt((String) address, 16));
         } else if (address instanceof Integer) /*Comes from DRAM*/ {
             add = Integer.toBinaryString((Integer) address);
         }
@@ -22,7 +22,13 @@ public class AddressParser {
 
     public static String toCpu (String address) {
         String add = "";
-
+            add = Integer.toHexString(Integer.parseInt(address, 2));
         return add;
+    }
+
+    public static int cacheIndex (String address) { //This method is for taking index out of address
+        String sIndex = address.substring(2); //We want 2-5 bits for index. 0-1 are for the tag
+        int iIndex = Integer.parseInt(sIndex, 2);
+        return iIndex;
     }
 }

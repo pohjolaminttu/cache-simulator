@@ -22,6 +22,5 @@ DRAM muuttaa desimaaleiksi 0 - 63 // käsittelee int
 -
 
 TODO;
-Jatka AddressParser loppuun: hexa muunnokset 
-Muistin komennot write ja read
-Cache nyt yleisesti :D muun muassa seuraavaks laita sinne muistipaikat. Again as in memory; ei matrixina vaikka hardwaressa näin onki
+Cache: "JATKA TÄSTÄ" kato onko tuossa indexissä null vai sisältöä eli miss/hit
+Ja sitte jatka read/write spesic juttuihi -> ehkä väliaikanen hit/miss muuttuja 

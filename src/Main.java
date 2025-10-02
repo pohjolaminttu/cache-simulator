@@ -6,7 +6,7 @@ public class Main {
         //We'll link DRAM, cache and CPU to each other for cohesion
         DRAM dram = new DRAM(64);
 
-        Cache cache = new Cache(dram);
+        Cache cache = new Cache(dram, 16);
 
         CPU cpu = new CPU(cache);
 

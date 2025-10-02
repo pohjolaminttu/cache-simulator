@@ -1,6 +1,12 @@
+/**
+ * The hardware of DRAM is organized in a matrix ( rows x columns )
+ * But the memory locations are named in "serial numbers" so they have a particular order
+ * In this simulator we localize the wanted memory location by those order sequential numbers
+ * All the memory locations are initially empty
+ */
 public class DRAM {
-    private int[] memory;
-    private int memorySize;
+    private int[] memory; //The data in memory decimal number as instructed
+    private int memorySize; //In bytes
 
     public DRAM(int size){
             memorySize = size;
@@ -11,10 +17,13 @@ public class DRAM {
      * Method checks whether type of request is read or write, and do that in given address
      * @.pre requestType == 1 // requestType == 0
      */
-    public void requestToMemory (int requestType, String address, int dataOut, int dataIn ) { //do we actually need dataIn here?
+    public Integer requestToMemory (int requestType, String address, int dataOut, int dataIn ) { //In my opinion we don't need dataIn here, but it was instructed, so I keep it like this
         int add = AddressParser.toDram(address);
         if (requestType == 0) /*READ*/ {
-
+            return memory[add];
+        } else /*WRITE, @.pre ensures there is no option for requestType other than 0 or 1*/{
+            memory[add] = dataOut;
+            return null; //We don't have to return anything when writing. But because read/write are in the same method, we need to return null here
         }
     }
 
