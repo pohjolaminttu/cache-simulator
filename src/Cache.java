@@ -1,3 +1,5 @@
+import java.awt.geom.AffineTransform;
+
 /*
 In cache, there need to be blocks for temporarily saving data.
 And they need to be initially empty.
@@ -27,9 +29,13 @@ public class Cache {
         this.dram = dram;
         this.size = size;
         blocks = new CacheBlock[size];
+
+        for (int i = 0; i < size; i++){
+            blocks[i]= new CacheBlock(0, false, 0); //Let's initialize all cache blocks to "empty"
+        }
     }
 
-    class CacheBlock {
+    static class CacheBlock {
         int tag;
         boolean valid;
         int data;
@@ -45,17 +51,47 @@ public class Cache {
      * Calls DRAM (memory) if READ is miss and always when WRITE
      * @.pre requestType == 1 || requestType == 0
      */
-    public void requestFromCPU(int requestType, String address, int dataOut, int dataIn){
+    public Integer requestFromCPU(int requestType, String address, int dataOut, int dataIn){
         /*START; parsing given address and check if MISS or HIT and print that*/
         String add = AddressParser.toCache(address);
         int index = AddressParser.cacheIndex(add);
-        //if () //JATKA TÄSTÄ -----------------------------------------------------------------------------------------
+        int rTag /*Requested tag*/= AddressParser.cacheTag(add);
+        boolean isHit = false;
+        if (blocks[index] != null) {
+            if (blocks[index].tag == rTag){
+                if (blocks[index].valid){ // = if it's true
+                    isHit = true;
+                }
+            }
+        }
 
         if (requestType == 0) /*READ*/ {
-            System.out.print("read");
+            if (isHit){
+                System.out.println("Read "+ address +": HIT");
+                return blocks[index].data;
+            } else {
+                System.out.println("Read "+ address +": MISS");
+                //Send read request to DRAM, save returned data to cache, return to CPU
+                int data_Out = dram.requestToMemory(0, add, 0,0); //dataOut is already defined so let's use data_Out here
+                blocks[index].data = data_Out;
+                blocks[index].tag = rTag;
+                blocks[index].valid = true;
+                return data_Out;
+            }
         } else if (requestType == 1) /*WRITE*/ {
-            System.out.print("write");
+            if (isHit){
+                System.out.println("Write "+address+": HIT");
+                dram.requestToMemory(1, add, dataOut, 0);
+                blocks[index].data = dataOut; //When hit, there is no need to update tag or valid bit, cause they are already right
+            } else {
+                System.out.println("Write "+address+": MISS");
+                dram.requestToMemory(1, add, dataOut, 0);
+                blocks[index].data = dataOut;
+                blocks[index].tag = rTag;
+                blocks[index].valid = true;
+            }
         }
+        return null;
     }
 }
 

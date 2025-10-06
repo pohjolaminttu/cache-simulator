@@ -22,5 +22,6 @@ DRAM muuttaa desimaaleiksi 0 - 63 // käsittelee int
 -
 
 TODO;
-Cache: "JATKA TÄSTÄ" kato onko tuossa indexissä null vai sisältöä eli miss/hit
-Ja sitte jatka read/write spesic juttuihi -> ehkä väliaikanen hit/miss muuttuja 
+CPU pyyntömetodit cachelle
+Sit käy läpi kaikki et onko tehty
+Ja sit vaa mainin kautta testaamaa :D

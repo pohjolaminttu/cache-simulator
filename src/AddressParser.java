@@ -1,3 +1,5 @@
+import java.awt.*;
+
 /**
  * In CPU we have addresses in hexadecimal form, 0x00 to 0x3F (String)
  * In cache we have addresses in binary form, 000000 to 111111 (String)
@@ -27,8 +29,12 @@ public class AddressParser {
     }
 
     public static int cacheIndex (String address) { //This method is for taking index out of address
-        String sIndex = address.substring(2); //We want 2-5 bits for index. 0-1 are for the tag
-        int iIndex = Integer.parseInt(sIndex, 2);
-        return iIndex;
+        String index = address.substring(2); //We want 2-5 bits for index. 0-1 are for the tag
+        return Integer.parseInt(index, 2);
+    }
+
+    public static int cacheTag (String address) {
+        String tag = address.substring(0,2);
+        return Integer.parseInt(tag, 2);
     }
 }
