@@ -14,7 +14,7 @@ Memory address is 6-bit long and that is enough also for cache. [2]tag[4]index[0
 -------------------------------------
 READING
 There need to be a way to check, if some specific data (it's address first) is in cache
-IF NOT -> fetch it from memory and change validity pin to 1 (I think)
+IF NOT -> fetch it from memory and change validity pin to true if it is not already
 
 WRITING
 probably first check if there is data -> modify and change the validity pin
