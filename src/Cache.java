@@ -1,5 +1,3 @@
-import java.awt.geom.AffineTransform;
-
 /*
 In cache, there need to be blocks for temporarily saving data.
 And they need to be initially empty.
@@ -17,17 +15,16 @@ There need to be a way to check, if some specific data (it's address first) is i
 IF NOT -> fetch it from memory and change validity pin to true if it is not already
 
 WRITING
-probably first check if there is data -> modify and change the validity pin
+first check if there is data in cache -> modify and change the validity pin
 send data and 1 (write) to memory
  */
+
 public class Cache {
-    private int size; //Due to given size of block is 1, here "size" means amount of the blocks
     private CacheBlock[] blocks;
     DRAM dram;
 
-    public Cache(DRAM dram, int size){
+    public Cache(DRAM dram, int size){ //Due to given size of block is 1, here "size" means amount of the blocks
         this.dram = dram;
-        this.size = size;
         blocks = new CacheBlock[size];
 
         for (int i = 0; i < size; i++){

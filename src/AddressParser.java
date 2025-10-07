@@ -1,5 +1,3 @@
-import java.awt.*;
-
 /**
  * In CPU we have addresses in hexadecimal form, 0x00 to 0x3F (String)
  * In cache we have addresses in binary form, 000000 to 111111 (String)
@@ -19,12 +17,6 @@ public class AddressParser {
         } else if (address instanceof Integer) /*Comes from DRAM*/ {
             add = Integer.toBinaryString((Integer) address);
         }
-        return add;
-    }
-
-    public static String toCpu (String address) {
-        String add = "";
-            add = Integer.toHexString(Integer.parseInt(address, 2));
         return add;
     }
 
